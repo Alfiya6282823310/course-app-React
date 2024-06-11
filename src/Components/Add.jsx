@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 export const Add = () => {
     const [data,changeData]=useState(
@@ -17,6 +18,18 @@ export const Add = () => {
     }
     const readValue=()=>{
         console.log(data)
+        axios.post("http://localhost:8083/",data).then(
+            (response)=>{
+                console.log(response.data)
+                if (response.data.status=="success")
+                    {
+                        alert("success")
+                    }
+                    else{
+                        alert("error")
+                    }
+            }
+        ).catch()
     }
   return (
     <div>
@@ -47,7 +60,7 @@ export const Add = () => {
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <label htmlFor="" className="form-label">trainer Name</label>
-                            <input type="text" className="form-control"  name='trainername' value={data.venue} onChange={inputHandler}/>
+                            <input type="text" className="form-control"  name='trainername' value={data.trainername} onChange={inputHandler}/>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                             <button className="btn btn-success" onClick={readValue}>Submit</button>

@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Viewall = () => {
+    const [data,changeData]=useState([])
+    const fetchData=()=>{
+        axios.get("http://localhost:8083/view").then(
+            (response)=>{
+                changeData(response.data)
+            }
+        ).catch().finally()
+    }
+    useEffect(()=>{fetchData()},[])
     return (
         <div>
             <Navbar/>
@@ -20,14 +30,21 @@ const Viewall = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                {
+                                    data.map(
+                                        (value,index)=>{
+                                            return  <tr>
+                                            <td>{value.title}</td>
+                                            <td>{value.desc}</td>
+                                            <td>{value.date}</td>
+                                            <td>{value.duration}</td>
+                                            <td>{value.venue}</td>
+                                            <td>{value.trainername}</td>
+                                        </tr>
+                                        }
+                                    )
+                                }
+                               
 
                             </tbody>
                         </table>
