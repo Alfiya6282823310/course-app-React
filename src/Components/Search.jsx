@@ -12,11 +12,26 @@ const Search = () => {
     const inputHandler = (event) => {
         changeData({ ...data, [event.target.name]: event.target.value })
     }
+    // search button event
     const readValue = () => {
         console.log(data)
         axios.post("http://localhost:8084/search",data).then(
             (response)=>{
             setResult(response.data)
+            }
+        ).catch().finally()
+    }
+    const  deleteCourse=(id)=>{
+        let input={"_id":id}
+        axios.post("http://localhost:8084/delete",input).then(
+            (response)=>{
+                console.log(response.data)
+                if(response.data.status== "success"){
+                    alert("successfully deleted")
+                }
+                else{
+                    alert("error")
+                }
             }
         ).catch().finally()
     }
@@ -57,7 +72,7 @@ const Search = () => {
                                                 <td>{value.duration }</td>
                                                 <td>{value.venue }</td>
                                                 <td>{value.trainername }</td>
-                                                <td><button className="btn btn-danger">Delete</button></td>
+                                                <td><button className="btn btn-danger" onClick={()=>{deleteCourse(value._id)}}>Delete</button></td>
                                             </tr>
         
                                         }
