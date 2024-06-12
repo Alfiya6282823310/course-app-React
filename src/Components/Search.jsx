@@ -57,7 +57,9 @@ const Search = () => {
                                                 <td>{value.duration }</td>
                                                 <td>{value.venue }</td>
                                                 <td>{value.trainername }</td>
+                                                <td><button className="btn btn-danger">Delete</button></td>
                                             </tr>
+        
                                         }
                                     )
                                 }

@@ -18,7 +18,7 @@ export const Add = () => {
     }
     const readValue=()=>{
         console.log(data)
-        axios.post("http://localhost:8083/",data).then(
+        axios.post("http://localhost:8084/",data).then(
             (response)=>{
                 console.log(response.data)
                 if (response.data.status=="success")
